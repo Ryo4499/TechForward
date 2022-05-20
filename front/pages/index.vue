@@ -6,7 +6,7 @@
           <span class="ml-2 display-3">Tech Map</span>
         </h1>
         <p class="pl-5 text-h5 my-3">
-          Tech Mapは社内で技術情報の共有を行うシステムです｡
+          Tech Mapは技術情報の共有を行うシステムです｡
         </p>
       </section>
       <section class="mt-10">
