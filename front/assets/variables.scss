@@ -1,0 +1,114 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+
+$grid-breakpoints: (
+  'xs': 0,
+  'sm': 340px,
+  'md': 540px,
+  'lg': 800px - 24px,
+  'xl': 1280px - 24px
+);
+
+@mixin rem($size){
+  font-size: $size + px;
+  font-size: ($size / 16) + rem;
+}
+
+@mixin kaisei(){
+  font-family: 'Kaisei HarunoUmi', serif !important;
+}
+
+@mixin klee(){
+  font-family: 'Klee One', cursive !important;
+}
+
+@mixin mplus(){
+  font-family: 'M PLUS 1p', sans-serif !important;
+}
+
+@font-face {
+  font-family: 'hackgen';
+  src: url('@/assets/fonts/Hack-Regular.ttf') format('truetype');
+}
+
+@mixin hackgen(){
+  font-family: 'hackgen', sans-serif !important;
+}
+
+
+@font-face{
+  font-family:'ricty';
+  src: url('@/assets/fonts/RictyDiminished-Regular.ttf') format('truetype');
+}
+
+@mixin ricty(){
+  font-family:'ricty',serif !important;
+}
+
+
+html {
+  overflow-y: visible;
+}
+
+div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+dl{
+  dt{
+    @include rem(18);
+    font-weight:bold;
+  }
+  dd{
+    @include rem(16);
+    margin-left: 0.25rem;
+  }
+}
+
+.v-card-title
+.v-card-text{
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+[v-cloak]{
+  display: none;
+}
+
+.v-textarea{
+  min-height: auto !important;
+  display:flex !important;
+  align-items: center !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track{
+  background-color:  #aaaaaa;
+  border-radius: 5px;
+  box-shadow: inset 3px 3px 3px rgba(255,255,255,0.2);
+}
+
+::-webkit-scrollbar-thumb{
+  background-color:  #9c9c9c;
+  border-radius: 5px;
+  box-shadow: inset 3px -3px 5px rgba(0,0,0,0.2);
+}
+
+::-webkit-scrollbar-corner{
+  display: none;
+}
+
+pre code{
+  @include hackgen()
+}
+
+.markdown{
+  @include ricty()
+}
