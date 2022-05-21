@@ -1,6 +1,6 @@
 ---
-name: Feature
-about: 新機能追加について
+name: Modify
+about: 仕様変更について
 ---
 
 ## 概要
