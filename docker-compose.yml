@@ -1,11 +1,18 @@
-version: '3'
+version: "3"
 
 services:
   db:
     image: mariadb:10.6.3
     volumes:
-      - ./mariadb/init:/docker-entrypoint-initdb.d
-      - ./mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+      - type: bind
+        source: ./mariadb/init
+        target: /docker-entrypoint-initdb.d
+      - type: bind
+        source: ./mariadb/my.cnf
+        target: /etc/mysql/conf.d/my.cnf
+      - type: volume
+        source: dbData
+        target: /var/lib/postgresql/data
     command:
       - mysqld
       - --character-set-server=utf8mb4
@@ -14,29 +21,41 @@ services:
       TZ: "Asia/Tokyo"
       MYSQL_ROOT_PASSWORD: password
     tty: true
+    restart: always
+    user: "999:999"
 
   front:
     build:
-        context: ./front
-        dockerfile: Dockerfile
+      context: ./front
     volumes:
-      - ./front:/front
-      - /front/node_modules
+      - type: bind
+        source: ./front
+        target: /front
+      - type: volume
+        source: frontModules
+        target: /front/node_modules
     depends_on:
       - db
       - api
     tty: true
-    command:  yarn dev
-       #bash -c "yarn build && yarn start"
+    command: "yarn start"
+    restart: always
+    user: "1000:1000"
 
   api:
     build:
-        context: ./api
-        dockerfile: Dockerfile
+      context: ./api
+      args:
+        UID: $UID
+        GID: $GID
+        USER: $USER
+        GROUP: $USER
     depends_on:
       - db
     volumes:
-      - ./api:/api
+      - type: bind
+        source: ./api
+        target: /api
     environment:
       TZ: Asia/Tokyo
     entrypoint:
@@ -47,12 +66,17 @@ services:
       - tcp://db:3306
     command: gunicorn --chdir / --pythonpath /api -b 0.0.0.0:5000 api.run:app
     tty: true
+    restart: always
 
   nginx:
     image: nginx:stable
     volumes:
-      - ./nginx/conf/default.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/log:/var/log/nginx
+      - type: bind
+        source: ./nginx/conf/default.conf
+        target: /etc/nginx/conf.d/default.conf
+      - type: bind
+        source: ./nginx/log
+        target: /var/log/nginx
     ports:
       - "0.0.0.0:80:80"
     depends_on:
@@ -61,3 +85,8 @@ services:
       - front
     environment:
       TZ: "Asia/Tokyo"
+    restart: always
+
+volumes:
+  dbData:
+  frontModules:
