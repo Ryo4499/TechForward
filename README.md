@@ -15,7 +15,7 @@
 
 ```bash
 cd training-2021
-cp api/.env.sample api/.env
+cp ./.env.sample .env
 ```
 
 ## 使い方
