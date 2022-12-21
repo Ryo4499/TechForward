@@ -88,7 +88,15 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/markdownit',
     '@nuxtjs/style-resources',
+    '@nuxtjs/proxy'
   ],
+  proxy: {
+    '/api/': {
+      target: 'http://localhost',
+      changeOrigin: true,
+      secure: false
+    }
+  },
   styleResources: {
     scss: ['@/assets/scss/*.scss'],
   },
@@ -132,8 +140,7 @@ export default {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://127.0.0.1/api',
-    timeout: 5000,
+    proxy: true,
   },
 
   auth: {

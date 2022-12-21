@@ -1,7 +1,8 @@
-from sqlalchemy import Column, String,DATETIME
+from sqlalchemy import Column, String, DATETIME
 from sqlalchemy.orm import *
 from sqlalchemy.sql.functions import current_timestamp
-from api.models.setting import Base,generate_uuid
+from models.setting import Base, generate_uuid
+
 
 class TokenBlocklist(Base):
     __tablename__ = "token_blocklist"
@@ -11,6 +12,6 @@ class TokenBlocklist(Base):
     created_at = Column(
         "created_at", DATETIME, nullable=False, server_default=current_timestamp()
     )
-    
-    def __init__(self,jti):
-        self.jti=jti
+
+    def __init__(self, jti):
+        self.jti = jti

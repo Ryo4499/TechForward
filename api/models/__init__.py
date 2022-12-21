@@ -1,10 +1,10 @@
 import sys
-from api.models.user import User
-from api.models.tag import Tag
-from api.models.article import Article
-from api.models.comment import Comment
-from api.models.article_tag import ArticleTag
-from api.models.setting import CONNECTION, Base, ENGINE, Session
+from models.user import User
+from models.tag import Tag
+from models.article import Article
+from models.comment import Comment
+from models.article_tag import ArticleTag
+from models.setting import CONNECTION, Base, ENGINE, Session
 
 
 def init_db():

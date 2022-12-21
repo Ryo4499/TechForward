@@ -1,19 +1,19 @@
 from datetime import datetime
-from api.helper.response import ResponseHandler
-from api.apis.pagination import Pagination
-from api.models.article import Article
-from api.models.comment import Comment
-from api.token import auth_required, get_jwt
-from api.models.user import User
+from helper.response import ResponseHandler
+from apis.pagination import Pagination
+from models.article import Article
+from models.comment import Comment
+from jwt_token import auth_required, get_jwt
+from models.user import User
 from traceback import format_exception_only
-from api.helper.error import ErrorHandler
+from helper.error import ErrorHandler
 from sqlalchemy import desc
 from marshmallow.exceptions import ValidationError
-from api.schemas.comment import CommentSchema
+from schemas.comment import CommentSchema
 from flask import request
 from flask_restful import Resource
-from api.models.setting import Session
-from api.helper.message import (
+from models.setting import Session
+from helper.message import (
     COMMENT_NOT_FOUND,
     ARTICLE_NOT_FOUND,
     PAGE_VALUE_ERROR,

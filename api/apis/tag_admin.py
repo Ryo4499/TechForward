@@ -1,14 +1,14 @@
 from traceback import format_exception_only
-from api.schemas.tag import TagSchema
-from api.helper.error import ErrorHandler
-from api.helper.response import ResponseHandler
+from schemas.tag import TagSchema
+from helper.error import ErrorHandler
+from helper.response import ResponseHandler
 from flask import request
 from marshmallow.exceptions import ValidationError
 from flask_restful import Resource
-from api.models.setting import Session
-from api.models.tag import Tag
-from api.token import admin_required
-from api.helper.message import TAG_ALREADY_REGISTED, TAG_NOT_FOUND
+from models.setting import Session
+from models.tag import Tag
+from jwt_token import admin_required
+from helper.message import TAG_ALREADY_REGISTED, TAG_NOT_FOUND
 
 
 class TagAdminAPI(Resource):

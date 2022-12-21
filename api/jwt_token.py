@@ -6,9 +6,9 @@ from flask_jwt_extended import (
     get_jwt,
     verify_jwt_in_request,
 )
-from api.models.setting import Session
-from api.models.token_blocklist import TokenBlocklist
-from api.models.user import User
+from models.setting import Session
+from models.token_blocklist import TokenBlocklist
+from models.user import User
 from functools import wraps
 
 # JWTのデフォルトの挙動を変更しているため､他の場所で使うものに関してもimportで定義

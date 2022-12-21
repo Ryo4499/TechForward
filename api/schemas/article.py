@@ -7,8 +7,8 @@ from sqlalchemy.orm import load_only
 from marshmallow import fields, post_load, EXCLUDE
 from marshmallow.validate import Length, Regexp
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from api.models import Article
-from api.models.setting import Session
+from models import Article
+from models.setting import Session
 from marshmallow_sqlalchemy.schema import auto_field
 
 

@@ -1,18 +1,18 @@
 from traceback import format_exception_only
 from sqlalchemy.sql.expression import asc, desc
 from sqlalchemy.sql.functions import func
-from api.schemas.tag import TagSchema
-from api.models.article import Article
-from api.apis.pagination import Pagination
-from api.helper.error import ErrorHandler
-from api.helper.response import ResponseHandler
+from schemas.tag import TagSchema
+from models.article import Article
+from apis.pagination import Pagination
+from helper.error import ErrorHandler
+from helper.response import ResponseHandler
 from flask import request
 from marshmallow.exceptions import ValidationError
 from flask_restful import Resource
-from api.models.setting import Session
-from api.models.tag import Tag
-from api.token import auth_required, get_jwt
-from api.helper.message import PAGE_VALUE_ERROR, TAG_ALREADY_REGISTED, TAG_NOT_FOUND
+from models.setting import Session
+from models.tag import Tag
+from jwt_token import auth_required, get_jwt
+from helper.message import PAGE_VALUE_ERROR, TAG_ALREADY_REGISTED, TAG_NOT_FOUND
 
 
 class TagAPI(Resource):

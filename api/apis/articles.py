@@ -1,18 +1,18 @@
 from traceback import format_exception_only
 from flask.wrappers import Response
 from sqlalchemy.sql.functions import func
-from api.helper.response import ResponseHandler
-from api.helper.error import ErrorHandler
-from api.models.user import User
-from api.schemas.article import ArticleSchema, TagSchema
-from api.token import auth_required, get_jwt
+from helper.response import ResponseHandler
+from helper.error import ErrorHandler
+from models.user import User
+from schemas.article import ArticleSchema, TagSchema
+from jwt_token import auth_required, get_jwt
 from flask_restful import Resource
 from sqlalchemy import desc
-from api.apis.pagination import Pagination
-from api.models.setting import Session
-from api.models.article import Article
-from api.models.tag import Tag
-from api.helper.message import ARTICLE_NOT_FOUND, PAGE_VALUE_ERROR
+from apis.pagination import Pagination
+from models.setting import Session
+from models.article import Article
+from models.tag import Tag
+from helper.message import ARTICLE_NOT_FOUND, PAGE_VALUE_ERROR
 
 
 class ArticlesAPI(Resource):

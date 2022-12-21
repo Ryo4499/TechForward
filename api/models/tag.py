@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String
 from sqlalchemy.orm import *
-from api.models.article_tag import ArticleTag
-from api.models.setting import Base, generate_uuid
+from models.article_tag import ArticleTag
+from models.setting import Base, generate_uuid
 
 
 class Tag(Base):

@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Boolean, DATETIME, text
 from sqlalchemy.orm import *
 from sqlalchemy.sql.functions import current_timestamp, func
 from sqlalchemy_utils import UUIDType
-from api.models.setting import Base, generate_uuid
+from models.setting import Base, generate_uuid
 from werkzeug.security import generate_password_hash, check_password_hash
 
 

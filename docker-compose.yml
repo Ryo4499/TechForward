@@ -1,8 +1,12 @@
 version: "3"
 
 services:
+  memcached:
+    image: memcached:alpine
+    restart: always
+
   db:
-    image: mariadb:10.6.3
+    image: mariadb:latest
     volumes:
       - type: bind
         source: ./mariadb/init
@@ -27,10 +31,12 @@ services:
   front:
     build:
       context: ./front
+      args:
+        UID: $UID
+        GID: $GID
+        USER: $USER
+        GROUP: $USER
     volumes:
-      - type: bind
-        source: ./front
-        target: /front
       - type: volume
         source: frontModules
         target: /front/node_modules
@@ -38,9 +44,7 @@ services:
       - db
       - api
     tty: true
-    command: "yarn start"
     restart: always
-    user: "1000:1000"
 
   api:
     build:
@@ -50,6 +54,10 @@ services:
         GID: $GID
         USER: $USER
         GROUP: $USER
+        DB_USER: $DB_USER
+        DB_PASS: $DB_PASS
+        DB_HOST: $DB_HOST
+        DB_NAME: $DB_NAME
     depends_on:
       - db
     volumes:
@@ -58,18 +66,11 @@ services:
         target: /api
     environment:
       TZ: Asia/Tokyo
-    entrypoint:
-      - dockerize
-      - -timeout
-      - 30s
-      - -wait
-      - tcp://db:3306
-    command: gunicorn --chdir / --pythonpath /api -b 0.0.0.0:5000 api.run:app
     tty: true
     restart: always
 
   nginx:
-    image: nginx:stable
+    image: nginx:alpine
     volumes:
       - type: bind
         source: ./nginx/conf/default.conf

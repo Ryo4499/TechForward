@@ -1,20 +1,20 @@
 from datetime import datetime
 from traceback import format_exception_only
-from api.token import (
+from jwt_token import (
     auth_required,
     self_or_admin_required_user,
     get_jwt,
 )
-from api.helper.error import ErrorHandler
-from api.helper.response import ResponseHandler
+from helper.error import ErrorHandler
+from helper.response import ResponseHandler
 from sqlalchemy import desc
 from flask_restful import Resource, request
 from marshmallow.exceptions import ValidationError
-from api.models.setting import Session
-from api.models.user import User
-from api.models.token_blocklist import TokenBlocklist
-from api.schemas.user import UserSchema
-from api.helper.message import (
+from models.setting import Session
+from models.user import User
+from models.token_blocklist import TokenBlocklist
+from schemas.user import UserSchema
+from helper.message import (
     USER_ALREADY_REGISTED,
     USER_IS_DELETED,
     USER_NOT_FOUND,

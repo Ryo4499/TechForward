@@ -3,7 +3,7 @@ from sqlalchemy import Column, ForeignKey, String, DATETIME, text
 from sqlalchemy.dialects.mysql import MEDIUMTEXT as Mediumtext
 from sqlalchemy.orm import *
 from sqlalchemy.sql.functions import current_timestamp, func
-from api.models.setting import Base, generate_uuid
+from models.setting import Base, generate_uuid
 
 
 class Comment(Base):

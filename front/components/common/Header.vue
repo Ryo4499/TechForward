@@ -2,14 +2,8 @@
   <v-app-bar absolute app>
     <v-row class="align-center">
       <v-app-bar-title class="ml-8">
-        <v-btn
-          class="text-h5 service general--text"
-          text
-          plain
-          :style="{ textTransform: 'none', opacity: 1 }"
-          :to="{ path: '/articles', query: { page: 1, perpage: 10 } }"
-          nuxt
-        >
+        <v-btn class="text-h5 service general--text" text plain :style="{ textTransform: 'none', opacity: 1 }"
+          :to="{ path: '/articles', query: { page: 1, perpage: 10 } }" nuxt>
           Tech Map
         </v-btn>
       </v-app-bar-title>
@@ -43,28 +37,17 @@
             <v-btn to="/edit-user" nuxt plain>ユーザ情報の変更</v-btn>
           </v-list-item>
           <v-list-item>
-            <v-btn
-              :to="{ path: '/articles/me', query: { page: 1, perpage: 10 } }"
-              nuxt
-              plain
-              >自分の記事一覧</v-btn
-            >
+            <v-btn :to="{ path: '/articles/me', query: { page: 1, perpage: 10 } }" nuxt plain>自分の記事一覧</v-btn>
           </v-list-item>
           <v-list-item v-if="$auth.user.role === 'admin'">
-            <v-btn
-              :to="{ path: '/admin/users', query: { page: 1, perpage: 20 } }"
-              nuxt
-              plain
-              >管理者画面へ</v-btn
-            >
+            <v-btn :to="{ path: '/admin/users', query: { page: 1, perpage: 20 } }" nuxt plain>管理者画面へ</v-btn>
           </v-list-item>
           <v-list-item>
-            <v-switch
-              v-model="$vuetify.theme.dark"
-              color="header"
-              inset
-              label="ダークテーマ"
-            ></v-switch>
+            <v-switch v-model="$vuetify.theme.dark" color="header" inset>
+              <template v-slot:label>
+                <v-icon color="header">mdi-brightness-4</v-icon>
+              </template>
+            </v-switch>
           </v-list-item>
         </v-list>
       </v-menu>

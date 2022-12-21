@@ -1,15 +1,15 @@
 from traceback import format_exception_only
-from api.helper.response import ResponseHandler
-from api.helper.error import ErrorHandler
-from api.schemas.user import UserSchema
+from helper.response import ResponseHandler
+from helper.error import ErrorHandler
+from schemas.user import UserSchema
 from flask import request
 from marshmallow.exceptions import ValidationError
 from flask_restful import Resource
-from api.models.setting import Session
-from api.models.token_blocklist import TokenBlocklist
-from api.models.user import User
-from api.token import create_access_token, get_jwt, auth_required
-from api.helper.message import UNAUTHORIZED, USER_IS_DELETED, INPUT_VALUE_DO_NOT_MATCH
+from models.setting import Session
+from models.token_blocklist import TokenBlocklist
+from models.user import User
+from jwt_token import create_access_token, get_jwt, auth_required
+from helper.message import UNAUTHORIZED, USER_IS_DELETED, INPUT_VALUE_DO_NOT_MATCH
 
 
 class LoginAPI(Resource):

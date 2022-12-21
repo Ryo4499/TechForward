@@ -2,8 +2,8 @@ import re
 from jsonschema.exceptions import ValidationError
 from marshmallow.decorators import validates_schema
 from sqlalchemy.orm import load_only, noload
-from api.models import User
-from api.models.setting import USERNAME_PATTERN,PASSWORD_PATTERN, Session
+from models import User
+from models.setting import USERNAME_PATTERN, PASSWORD_PATTERN, Session
 from marshmallow import fields, post_load, EXCLUDE
 from marshmallow.validate import And, Equal, Length, OneOf, Email, Regexp
 from marshmallow_sqlalchemy.schema import SQLAlchemyAutoSchema, auto_field

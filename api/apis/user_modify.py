@@ -1,18 +1,18 @@
 from traceback import format_exception_only
-from api.schemas.user import UserSchema
-from api.helper.error import ErrorHandler
-from api.helper.response import ResponseHandler
-from api.token import self_or_admin_required_user
+from schemas.user import UserSchema
+from helper.error import ErrorHandler
+from helper.response import ResponseHandler
+from jwt_token import self_or_admin_required_user
 from flask import request
-from api.helper.message import (
+from helper.message import (
     USER_ALREADY_REGISTED,
     USER_IS_DELETED,
     USER_NOT_FOUND,
 )
 from flask_restful import Resource
 from marshmallow.exceptions import ValidationError
-from api.models.setting import Session
-from api.models.user import User
+from models.setting import Session
+from models.user import User
 
 
 class UserModifyEmailAPI(Resource):

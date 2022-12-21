@@ -1,16 +1,16 @@
-from api.helper.response import ResponseHandler
-from api.apis.pagination import Pagination
-from api.models.comment import Comment
-from api.token import admin_required
-from api.models.user import User
+from helper.response import ResponseHandler
+from apis.pagination import Pagination
+from models.comment import Comment
+from jwt_token import admin_required
+from models.user import User
 from traceback import format_exception_only
-from api.helper.error import ErrorHandler
+from helper.error import ErrorHandler
 from sqlalchemy import desc
-from api.schemas.comment import CommentSchema
-from api.models.article import Article
+from schemas.comment import CommentSchema
+from models.article import Article
 from flask_restful import Resource
-from api.models.setting import Session
-from api.helper.message import COMMENT_NOT_FOUND, PAGE_VALUE_ERROR, ARTICLE_NOT_FOUND
+from models.setting import Session
+from helper.message import COMMENT_NOT_FOUND, PAGE_VALUE_ERROR, ARTICLE_NOT_FOUND
 
 
 class CommentsAdminAPI(Resource):

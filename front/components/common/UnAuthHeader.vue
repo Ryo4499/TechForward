@@ -2,14 +2,8 @@
   <v-app-bar absolute app>
     <v-row class="align-center">
       <v-app-bar-title class="ml-8">
-        <v-btn
-          text
-          plain
-          class="service text-h5 general--text"
-          :style="{ textTransform: 'none', opacity: 1 }"
-          to="/"
-          nuxt
-        >
+        <v-btn text plain class="service text-h5 general--text" :style="{ textTransform: 'none', opacity: 1 }" to="/"
+          nuxt>
           Tech Map
         </v-btn>
       </v-app-bar-title>
@@ -25,14 +19,12 @@
         <h4 class="ml-2">ログイン</h4>
       </v-btn>
 
-      <v-switch
-        v-model="$vuetify.theme.dark"
-        hide-details="false"
-        label="ダークテーマ"
-        color="switch general--text"
-        class="mx-2 general--text"
-        inset
-      ></v-switch>
+      <v-switch v-model="$vuetify.theme.dark" hide-details="false" color="switch general--text"
+        class="mx-2 general--text" inset>
+        <template v-slot:label>
+          <v-icon color="header">mdi-brightness-4</v-icon>
+        </template>
+      </v-switch>
     </v-row>
   </v-app-bar>
 </template>

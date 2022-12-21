@@ -1,6 +1,6 @@
 from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.orm import *
-from api.models.setting import Base
+from models.setting import Base
 
 ArticleTag = Table(
     "article_tag",

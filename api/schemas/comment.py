@@ -1,10 +1,10 @@
-from api.schemas.user import UserSchema
+from schemas.user import UserSchema
 from sqlalchemy.orm import load_only
 from marshmallow import fields, post_load, EXCLUDE
 from marshmallow.validate import Length
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from api.models import Comment
-from api.models.setting import Session
+from models import Comment
+from models.setting import Session
 from marshmallow_sqlalchemy.schema import auto_field
 
 

@@ -16,10 +16,10 @@ dotenv_path = join(dirname(__file__), "../.env")
 load_dotenv(dotenv_path)
 
 DATABASE = "mariadb+mariadbconnector://%s:%s@%s/%s?charset=utf8mb4" % (
-    os.environ.get("DB_USER"),
-    os.environ.get("DB_PASS"),
-    os.environ.get("DB_HOST"),
-    os.environ.get("DB_NAME"),
+    os.environ["DB_USER"],
+    os.environ["DB_PASS"],
+    os.environ["DB_HOST"],
+    os.environ["DB_NAME"],
 )
 
 ENGINE = create_engine(

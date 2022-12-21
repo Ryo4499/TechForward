@@ -3,17 +3,17 @@ from datetime import datetime
 from traceback import format_exception_only
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError
-from api.helper.response import ResponseHandler
-from api.schemas.article import ArticleSchema, adminReqSchema, userReqSchema
-from api.token import auth_required, get_jwt
+from helper.response import ResponseHandler
+from schemas.article import ArticleSchema, adminReqSchema, userReqSchema
+from jwt_token import auth_required, get_jwt
 from flask import request
-from api.helper.error import ErrorHandler
+from helper.error import ErrorHandler
 from flask_restful import Resource
-from api.models.setting import Session, REGEX_PATTERN
-from api.models.article import Article
-from api.models.user import User
-from api.models.tag import Tag
-from api.helper.message import (
+from models.setting import Session, REGEX_PATTERN
+from models.article import Article
+from models.user import User
+from models.tag import Tag
+from helper.message import (
     ARTICLE_NOT_FOUND,
     TITLE_VALIDATION_ERROR,
     TAG_VALIDATION_ERROR,
