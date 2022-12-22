@@ -3,7 +3,7 @@ version: "3"
 services:
   memcached:
     image: memcached:alpine
-    restart: always
+    restart: unless-stopped
 
   db:
     image: mariadb:latest
@@ -25,7 +25,7 @@ services:
       TZ: "Asia/Tokyo"
       MYSQL_ROOT_PASSWORD: password
     tty: true
-    restart: always
+    restart: unless-stopped
     user: "999:999"
 
   front:
@@ -44,7 +44,7 @@ services:
       - db
       - api
     tty: true
-    restart: always
+    restart: unless-stopped
 
   api:
     build:
@@ -67,7 +67,7 @@ services:
     environment:
       TZ: Asia/Tokyo
     tty: true
-    restart: always
+    restart: unless-stopped
 
   nginx:
     image: nginx:alpine
@@ -86,7 +86,7 @@ services:
       - front
     environment:
       TZ: "Asia/Tokyo"
-    restart: always
+    restart: unless-stopped
 
 volumes:
   dbData:
