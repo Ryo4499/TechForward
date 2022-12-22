@@ -11,7 +11,7 @@
 ## .envについて
 
 .envがないとapiが起動しません｡
-/apiにて.env.sampleを.envという名前で/api直下に複製してください｡
+.env.sampleを.envという名前で./直下に複製してください｡
 
 ```bash
 cd training-2021
