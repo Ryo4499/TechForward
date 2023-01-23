@@ -1,10 +1,6 @@
 version: "3"
 
 services:
-  memcached:
-    image: memcached:alpine
-    restart: unless-stopped
-
   db:
     image: mariadb:latest
     volumes:
