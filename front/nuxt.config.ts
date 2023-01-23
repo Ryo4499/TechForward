@@ -15,8 +15,8 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Tech Map',
-    title: 'Tech Map',
+    titleTemplate: '%s - Tech Share',
+    title: 'Tech Share',
     htmlAttrs: {
       lang: 'ja',
     },
@@ -26,7 +26,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Tech Mapは社内で技術記事を共有するためのシステムです｡',
+        content: 'Tech Shareは技術記事を共有するためのシステムです｡',
       },
       { name: 'format-detection', content: 'telephone=no' },
     ],

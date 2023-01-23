@@ -2,7 +2,7 @@
   <v-footer class="mt-3" absolute app>
     <v-row class="justify-center no-gutters text-center">
       <v-col>
-        <div class="general--text text-body-1">Tech Map 2021</div>
+        <div class="general--text text-body-1">Tech Share 2021</div>
         <span class="general--text">Created by Ryo Arai</span>
       </v-col>
     </v-row>

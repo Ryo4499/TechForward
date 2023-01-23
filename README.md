@@ -1,4 +1,4 @@
-# Tech Map
+# Tech Share
 
 技術を共有するためのWebアプリケーションです｡
 
