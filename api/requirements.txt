@@ -44,7 +44,7 @@ pyrsistent==0.19.3
 python-dotenv==0.21.1
 pytz==2022.7.1
 regex==2022.10.31
-rich==12.6.0
+rich==13.2.0
 six==1.16.0
 SQLAlchemy==1.4.46
 SQLAlchemy-Utils==0.39.0
