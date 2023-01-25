@@ -1,2 +1,3 @@
 #!/bin/sh
-pip list -o | awk '{print $1}' | xargs pip install -U
+pip-review --auto
+pip freeze > ./requirements.txt

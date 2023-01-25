@@ -93,8 +93,8 @@ def create_app(test_config=None) -> Flask:
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     limiter = Limiter(
-        app,
-        key_func=get_remote_address,
+        get_remote_address,
+        app=app,
         storage_uri="memcached://memcached:11211",
         default_limits=[
             "1080000 per day",
