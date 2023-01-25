@@ -41,4 +41,4 @@ RUN chown $USER:$GROUP -R ./ && unset UID GID GROUP
 USER $USER
 
 ENTRYPOINT ["dockerize","-timeout","30s","-wait","tcp://db:3306"] 
-CMD ["gunicorn","--chdir", "./","--pythonpath","./","-b","0.0.0.0:5000", "run:app"]
+CMD ["gunicorn","--chdir", "./","--pythonpath","./","-b","127.0.0.1:5000", "run:app"]

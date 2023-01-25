@@ -5,7 +5,7 @@ import datetime
 class Development(object):
     SECRET_KEY = os.urandom(24)
     PORT = 5000
-    HOST = "0.0.0.0"
+    HOST = "127.0.0.1"
     DEBUG = True
     TESTING = False
     JSON_AS_ASCII = False
@@ -19,7 +19,7 @@ class Development(object):
 class Testing(object):
     SECRET_KEY = os.urandom(24)
     PORT = 5000
-    HOST = "0.0.0.0"
+    HOST = "127.0.0.1"
     DEBUG = True
     TESTING = True
     JSON_AS_ASCII = False
@@ -33,7 +33,7 @@ class Testing(object):
 class Production(object):
     SECRET_KEY = os.urandom(24)
     PORT = 5000
-    HOST = "0.0.0.0"
+    HOST = "127.0.0.1"
     DEBUG = False
     TESTING = False
     JSON_AS_ASCII = False
