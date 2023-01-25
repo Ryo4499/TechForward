@@ -4,7 +4,7 @@
       <v-app-bar-title class="ml-8">
         <v-btn class="text-h5 service general--text" text plain :style="{ textTransform: 'none', opacity: 1 }"
           :to="{ path: '/articles', query: { page: 1, perpage: 10 } }" nuxt>
-          Tech Share
+          Tech Forward
         </v-btn>
       </v-app-bar-title>
       <v-spacer></v-spacer>

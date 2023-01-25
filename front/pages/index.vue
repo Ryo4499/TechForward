@@ -3,10 +3,10 @@
     <v-container class="text-center justify-center">
       <section>
         <h1 class="my-4 d-flex flex-row justify-center align-center">
-          <span class="ml-2 display-3">Tech Share</span>
+          <span class="ml-2 display-3">Tech Forward</span>
         </h1>
         <p class="pl-5 text-h5 my-3">
-          Tech Shareは技術情報の共有を行うシステムです｡
+          Tech Forwardは技術情報の共有を行うシステムです｡
         </p>
       </section>
       <section class="mt-10">
@@ -80,8 +80,8 @@ export default Vue.extend({
   head() {
     return {
       title: 'トップページ',
-      meta:[
-        {hid:'discription',name:'discription',content:'Tech Shareのトップページです｡'}
+      meta: [
+        { hid: 'discription', name: 'discription', content: 'Tech Forwardのトップページです｡' }
       ]
     }
   },

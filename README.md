@@ -1,4 +1,4 @@
-# Tech Share
+# Tech Forward
 
 技術を共有するためのWebアプリケーションです｡
 
@@ -14,7 +14,7 @@
 .env.sampleを.envという名前で./直下に複製してください｡
 
 ```bash
-cd training-2021
+cd TechForward
 cp ./.env.sample .env
 ```
 
@@ -23,8 +23,8 @@ cp ./.env.sample .env
 1. このリポジトリをクローンする
 
 ```bash
-git clone git@github.com:systemsoft-ss1/training-2021.git
-cd ./training-2021
+git clone git@github.com:Ryo4499/TechForward.git
+cd ./TechForward
 ```
 
 2. プロジェクトのルートディレクトリでdocker-composeの実行

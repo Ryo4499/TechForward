@@ -15,8 +15,8 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - Tech Share',
-    title: 'Tech Share',
+    titleTemplate: '%s - Tech Forward',
+    title: 'Tech Forward',
     htmlAttrs: {
       lang: 'ja',
     },
@@ -26,7 +26,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Tech Shareは技術記事を共有するためのシステムです｡',
+        content: 'Tech Forwardは技術記事を共有するためのシステムです｡',
       },
       { name: 'format-detection', content: 'telephone=no' },
     ],

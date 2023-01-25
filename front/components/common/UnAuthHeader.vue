@@ -4,7 +4,7 @@
       <v-app-bar-title class="ml-8">
         <v-btn text plain class="service text-h5 general--text" :style="{ textTransform: 'none', opacity: 1 }" to="/"
           nuxt>
-          Tech Share
+          Tech Forward
         </v-btn>
       </v-app-bar-title>
 

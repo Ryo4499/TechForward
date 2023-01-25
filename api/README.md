@@ -1,4 +1,4 @@
-# Tech Share Back End
+# Tech Forward Back End
 
 ## API単体での動作
 
@@ -28,6 +28,6 @@ DBのポートは.envを参照して下さい｡
 .env.sampleを.envという名前で./直下に複製してください｡
 
 ```bash
-$ cd training-2021
+$ cd TechForward
 $ cp .env.sample .env
 ```
