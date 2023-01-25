@@ -1,6 +1,12 @@
-version: "3"
+version: "3.9"
 
 services:
+  memcached:
+    image: memcached:1.6.18-alpine
+    networks:
+      db_net:
+        ipv4_address: 172.30.3.4
+
   db:
     image: mariadb:latest
     volumes:
@@ -23,6 +29,9 @@ services:
     tty: true
     restart: unless-stopped
     user: "999:999"
+    networks:
+      db_net:
+        ipv4_address: 172.30.3.2
 
   front:
     build:
@@ -41,6 +50,9 @@ services:
       - api
     tty: true
     restart: unless-stopped
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.4
 
   api:
     build:
@@ -64,6 +76,11 @@ services:
       TZ: Asia/Tokyo
     tty: true
     restart: unless-stopped
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.3
+      db_net:
+        ipv4_address: 172.30.3.3
 
   nginx:
     image: nginx:alpine
@@ -75,7 +92,7 @@ services:
         source: ./nginx/log
         target: /var/log/nginx
     ports:
-      - "0.0.0.0:80:80"
+      - "127.0.0.1:80:80"
     depends_on:
       - db
       - api
@@ -83,7 +100,28 @@ services:
     environment:
       TZ: "Asia/Tokyo"
     restart: unless-stopped
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.2
 
 volumes:
   dbData:
   frontModules:
+
+networks:
+  default:
+    external: false
+  app_net:
+    driver: bridge
+    internal: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/24
+  db_net:
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.3.0/24
