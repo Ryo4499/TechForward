@@ -6,21 +6,16 @@
       <v-row class="d-flex flex-column text-right mt-1 mr-3">
         <v-col>
           <v-row class="align-certer my-1">
-            <v-col
-              v-if="item.draft === true"
-              class="text-left ml-8 text-h5 accent--text"
-            >
+            <v-col v-if="item.draft === true" class="text-left ml-8 text-h5 accent--text">
               下書き
             </v-col>
             <v-col class="text-body-2 text-left ml-8">
               作成者:
-              <nuxt-link
-                :to="{
-                  name: 'articles/user/username',
-                  params: { username: item.user.userName },
-                  query: { page: 1, perpage: 10 },
-                }"
-              >
+              <nuxt-link :to="{
+                name: 'articles/user/username',
+                params: { username: item.user.userName },
+                query: { page: 1, perpage: 10 },
+              }">
                 {{ item.user.userName }}
               </nuxt-link>
             </v-col>
@@ -39,25 +34,18 @@
           </v-card-title>
         </v-responsive>
         <v-responsive class="mx-auto px-16" max-height="2.7rem">
-          <div
-            class="markdown"
-            :style="{ opacity: 0.35 }"
-            v-html="$md.render(item.content)"
-          ></div>
+          <div class="markdown" :style="{ opacity: 0.35 }" v-html="$md.render(item.content)"></div>
         </v-responsive>
         <v-responsive class="mt-10 ml-13 pa-2 align-center body-2 ml-6">
           <div class="d-flex flex-column">
             <v-row class="">&nbsp;タグ:</v-row>
             <v-row>
               <span class="ml-2" v-for="tag in item.tags" :key="tag">
-                <nuxt-link
-                  class="mx-1"
-                  :to="{
-                    name: 'articles/tag/tagname',
-                    params: { tagname: tag },
-                    query: { page: 1, perpage: 10 },
-                  }"
-                >
+                <nuxt-link class="mx-1" :to="{
+                  name: 'articles/tag/tagname',
+                  params: { tagname: tag },
+                  query: { page: 1, perpage: 10 },
+                }">
                   {{ tag }}
                 </nuxt-link>
               </span>
@@ -69,41 +57,22 @@
             </v-row>
           </div>
           <div class="d-flex flex-row justify-end mt-4 mb-1">
-            <v-btn
-              v-if="
-                item.user.userName === $auth.user.userName ||
-                $auth.user.role === 'admin'
-              "
-              :disabled="push"
-              class="mx-2"
-              outlined
-              @click.prevent="deleteConfirm(item)"
-            >
+            <v-btn v-if="
+              item.user.userName === $auth.user.userName ||
+              $auth.user.role === 'admin'
+            " :disabled="push" class="mx-2" outlined @click.prevent="deleteConfirm(item)">
               削除
             </v-btn>
-            <v-btn
-              v-if="
-                item.user.userName === $auth.user.userName ||
-                $auth.user.role === 'admin'
-              "
-              :disabled="push"
-              class="mx-1"
-              :to="/edit-article/ + `${item.articleId}`"
-              outlined
-              nuxt
-            >
+            <v-btn v-if="
+              item.user.userName === $auth.user.userName ||
+              $auth.user.role === 'admin'
+            " :disabled="push" class="mx-1" :to="/edit-article/ + `${item.articleId}`" outlined nuxt>
               編集
             </v-btn>
-            <v-btn
-              class="mx-1"
-              :to="{
-                path: `/article/${item.articleId}`,
-                query: { page: 1, perpage: 10 },
-              }"
-              :disabled="push"
-              outlined
-              nuxt
-            >
+            <v-btn class="mx-1" :to="{
+              path: `/article/${item.articleId}`,
+              query: { page: 1, perpage: 10 },
+            }" :disabled="push" outlined nuxt>
               詳細を見る
             </v-btn>
           </div>
@@ -122,15 +91,8 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-pagination
-      v-if="total >= 1"
-      v-model="page"
-      class="my-4"
-      color="primary general--text"
-      :length="total"
-      :total-visible="5"
-      @input="loadData()"
-    ></v-pagination>
+    <v-pagination v-if="total >= 1" v-model="page" class="my-4" color="primary general--text" :length="total"
+      :total-visible="5" @input="loadData()"></v-pagination>
   </v-container>
 </template>
 
@@ -223,7 +185,7 @@ export default Vue.extend({
           this.$vuetify.goTo(0)
           this.show = true
         })
-        .catch((err) => {})
+        .catch((err) => { })
         .finally(() => {
           this.push = false
         })
@@ -243,7 +205,7 @@ export default Vue.extend({
           // @ts-ignore
           this.items.splice(this.editedIndex, 1)
         })
-        .catch((err) => {})
+        .catch((err) => { })
         .finally(() => {
           this.push = false
         })
@@ -254,6 +216,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .title {
-  @include ricty();
+  @include hackgen();
 }
 </style>

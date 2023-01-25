@@ -38,16 +38,6 @@ $grid-breakpoints: (
 }
 
 
-@font-face{
-  font-family:'ricty';
-  src: url('@/assets/fonts/RictyDiminished-Regular.ttf') format('truetype');
-}
-
-@mixin ricty(){
-  font-family:'ricty',serif !important;
-}
-
-
 html {
   overflow-y: visible;
 }
@@ -110,5 +100,5 @@ pre code{
 }
 
 .markdown{
-  @include ricty()
+  @include hackgen()
 }
