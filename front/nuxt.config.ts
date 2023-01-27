@@ -1,4 +1,3 @@
-import { User } from './@types/comments.d'
 import colors from 'vuetify/es5/util/colors'
 import Sass from 'sass'
 import webpack from 'webpack'
@@ -67,7 +66,7 @@ export default {
     '@/plugins/vee-validate.ts',
     '@/plugins/axios.ts',
     '@/plugins/vuetify.ts',
-    { src: '@/plugins/logger.ts', ssr: false },
+    { src: '@/plugins/logger.ts', ssr: true },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -92,7 +91,7 @@ export default {
   ],
   proxy: {
     '/api/': {
-      target: 'http://localhost',
+      target: 'http://back:5000',
       changeOrigin: true,
       secure: false
     }
