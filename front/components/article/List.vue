@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="show">
     <h1 class="mt-2 mb-3">{{ genTitle }}</h1>
-    <h1 v-if="items == [] || items == null">記事が見つかりません｡</h1>
+    <h1 v-if="items == null">記事が見つかりません｡</h1>
     <v-card v-for="item in items" :key="item.articleId">
       <v-row class="d-flex flex-column text-right mt-1 mr-3">
         <v-col>
@@ -58,14 +58,14 @@
           </div>
           <div class="d-flex flex-row justify-end mt-4 mb-1">
             <v-btn v-if="
-              item.user.userName === $auth.user.userName ||
-              $auth.user.role === 'admin'
+              item.user.userName === $auth.user!.userName ||
+              $auth.user!.role === 'admin'
             " :disabled="push" class="mx-2" outlined @click.prevent="deleteConfirm(item)">
               削除
             </v-btn>
             <v-btn v-if="
-              item.user.userName === $auth.user.userName ||
-              $auth.user.role === 'admin'
+              item.user.userName === $auth.user!.userName ||
+              $auth.user!.role === 'admin'
             " :disabled="push" class="mx-1" :to="/edit-article/ + `${item.articleId}`" outlined nuxt>
               編集
             </v-btn>
@@ -106,7 +106,7 @@ export type DataType = {
   total: number
   push: boolean
   show: boolean
-  items: Articles[]
+  items: Article[]
   editItem: Article
   showConfirm: boolean
 }
@@ -154,7 +154,7 @@ export default Vue.extend({
       } else if (path === 'articles/user/username') {
         return `${this.$route.params.username}さんの記事一覧`
       } else if (path === 'articles/me') {
-        const name = this.$auth.user.userName
+        const name = this.$auth.user!.userName
         return `${name}さんの記事一覧`
       } else {
         return '記事一覧ページ'

@@ -10,10 +10,7 @@
               ログイン
             </nuxt-link>
             <br />
-            <nuxt-link
-              v-if="this.$auth.loggedIn && this.error.statusCode !== 401"
-              to="/articles"
-            >
+            <nuxt-link v-if="$auth.loggedIn && error.statusCode !== 401" to="/articles">
               トップページへ
             </nuxt-link>
             <nuxt-link v-else to="/"> トップページへ </nuxt-link>
@@ -41,4 +38,5 @@ export default Vue.extend({
 </script>
 
 <style scoped>
+
 </style>
