@@ -34,7 +34,7 @@
             </ValidationProvider>
           </v-responsive>
           <v-responsive v-if="
-            $auth.user!.role === 'admin' &&
+            $auth.user?.role === 'admin' &&
             $route.name === 'edit-article/articleid'
           " class="my-2">
             <v-select v-model="item.isActivate" label="有効" :items="[true, false]"></v-select>
@@ -222,7 +222,7 @@ export default Vue.extend({
       let path = '/articles'
 
       if (
-        this.$auth.user!.role === 'admin' &&
+        this.$auth.user?.role === 'admin' &&
         // @ts-ignore
         this.$route.query.role === 'admin'
       ) {
@@ -238,7 +238,7 @@ export default Vue.extend({
       this.item.draft = true
       let path = '/articles/me'
       if (
-        this.$auth.user!.role === 'admin' &&
+        this.$auth.user?.role === 'admin' &&
         // @ts-ignore
         this.$route.query.role === 'admin'
       ) {

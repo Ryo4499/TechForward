@@ -3,47 +3,25 @@
     <ValidationObserver ref="newForm" v-slot="{ invalid }">
       <v-row>
         <v-col>
-          <ValidationProvider
-            v-slot="{ errors }"
-            name="コメント"
-            :rules="{
-              max: 1000,
-              min: 1,
-              required: true,
-            }"
-          >
-            <v-textarea
-              v-model="newComment"
-              label="コメント"
-              placeholder="コメントを入力"
-              :error-messages="errors"
-              :counter="1000"
-              maxlength="1000"
-              class="markdown"
-              auto-grow
-              outlined
-              rows="1"
-              row-height="15"
-              @keydown.tab.exact.prevent="tabLeftNewComment($event, newComment)"
-            ></v-textarea>
+          <ValidationProvider v-slot="{ errors }" name="コメント" :rules="{
+            max: 1000,
+            min: 1,
+            required: true,
+          }">
+            <v-textarea v-model="newComment" label="コメント" placeholder="コメントを入力" :error-messages="errors" :counter="1000"
+              maxlength="1000" class="markdown" auto-grow outlined rows="1" row-height="15"
+              @keydown.tab.exact.prevent="tabLeftNewComment($event, newComment)"></v-textarea>
           </ValidationProvider>
         </v-col>
         <v-col v-if="newComment !== ''" cols="6">
           <v-responsive class="my-5 overflow-x-auto">
-            <div
-              class="text-wrap markdown"
-              v-html="$md.render(newComment)"
-            ></div>
+            <div class="text-wrap markdown" v-html="$md.render(newComment)"></div>
           </v-responsive>
         </v-col>
       </v-row>
       <v-row>
         <v-col class="d-flex flex-row justify-end">
-          <v-btn
-            :disabled="invalid || push"
-            class="mr-5 mb-2"
-            @click.prevent="saveComment"
-          >
+          <v-btn :disabled="invalid || push" class="mr-5 mb-2" @click.prevent="saveComment">
             投稿
           </v-btn>
         </v-col>
@@ -56,22 +34,16 @@
           <v-row class="align-center my-1 mx-auto">
             <v-col class="body-2 text-left" cols="12" md="4" lg="4">
               <span class="ml-3">作成者:</span>
-              <nuxt-link
-                :to="{
-                  name: 'articles/user/username',
-                  params: { username: item.user.userName },
-                }"
-              >
+              <nuxt-link :to="{
+                name: 'articles/user/username',
+                params: { username: item.user.userName },
+              }">
                 {{ item.user.userName }}
               </nuxt-link>
             </v-col>
             <v-col class="caption text-right" cols="12" md="8" lg="8">
-              <v-responsive class="mr-2"
-                >最終更新日: {{ item.updatedAt }}</v-responsive
-              >
-              <v-responsive class="mr-2"
-                >作成日: {{ item.createdAt }}</v-responsive
-              >
+              <v-responsive class="mr-2">最終更新日: {{ item.updatedAt }}</v-responsive>
+              <v-responsive class="mr-2">作成日: {{ item.createdAt }}</v-responsive>
             </v-col>
           </v-row>
           <v-responsive v-if="!item.edit" class="px-10 overflow-x-auto">
@@ -82,35 +54,20 @@
               <v-row>
                 <v-col>
                   <v-responsive>
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      name="既存コメント"
-                      :rules="{
-                        max: 1000,
-                        min: 1,
-                        required: true,
-                      }"
-                    >
-                      <v-textarea
-                        v-model="item.content"
-                        :error-messages="errors"
-                        :counter="1000"
-                        maxlength="1000"
-                        class="markdown"
-                        auto-grow
-                        rows="1"
-                        row-height="15"
-                        @keydown.tab.exact.prevent="tabLeft($event, item)"
-                      ></v-textarea>
+                    <ValidationProvider v-slot="{ errors }" name="既存コメント" :rules="{
+                      max: 1000,
+                      min: 1,
+                      required: true,
+                    }">
+                      <v-textarea v-model="item.content" :error-messages="errors" :counter="1000" maxlength="1000"
+                        class="markdown" auto-grow rows="1" row-height="15"
+                        @keydown.tab.exact.prevent="tabLeft($event, item)"></v-textarea>
                     </ValidationProvider>
                   </v-responsive>
                 </v-col>
                 <v-col v-if="item.content !== ''" cols="6">
                   <v-responsive class="overflow-x-auto">
-                    <div
-                      class="markdown"
-                      v-html="$md.render(item.content)"
-                    ></div>
+                    <div class="markdown" v-html="$md.render(item.content)"></div>
                   </v-responsive>
                 </v-col>
               </v-row>
@@ -119,39 +76,26 @@
           <v-row class="mt-2 mb-1">
             <v-col>
               <v-responsive class="my-2 text-right">
-                <v-btn
-                  v-if="item.edit"
-                  class="mx-2"
-                  @click.prevent="
-                    () => {
-                      item.content = tmpComment
-                      tmpComment = ''
-                      item.edit = false
-                      item.editText = '編集'
-                    }
-                  "
-                >
+                <v-btn v-if="item.edit" class="mx-2" @click.prevent="
+                  () => {
+                    item.content = tmpComment
+                    tmpComment = ''
+                    item.edit = false
+                    item.editText = '編集'
+                  }
+                ">
                   キャンセル
                 </v-btn>
-                <v-btn
-                  v-if="
-                    item.user.userName === $auth.user.userName ||
-                    $auth.user.role === 'admin'
-                  "
-                  :disabled="invalid || push"
-                  class="mx-2"
-                  @click.prevent="editComment(item)"
-                >
+                <v-btn v-if="
+                  item.user.userName === $auth.user?.userName ||
+                  $auth.user?.role === 'admin'
+                " :disabled="invalid || push" class="mx-2" @click.prevent="editComment(item)">
                   {{ item.editText }}
                 </v-btn>
-                <v-btn
-                  v-if="
-                    item.user.userName === $auth.user.userName ||
-                    $auth.user.role === 'admin'
-                  "
-                  class="mx-2"
-                  @click.prevent="deleteConfirm(item)"
-                >
+                <v-btn v-if="
+                  item.user.userName === $auth.user?.userName ||
+                  $auth.user?.role === 'admin'
+                " class="mx-2" @click.prevent="deleteConfirm(item)">
                   削除
                 </v-btn>
               </v-responsive>
@@ -173,16 +117,8 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-pagination
-      v-if="total >= 1"
-      v-model="page"
-      class="my-4"
-      :length="total"
-      :total-visible="5"
-      :disabled="push"
-      color="primary general--text"
-      @input="loadData()"
-    ></v-pagination>
+    <v-pagination v-if="total >= 1" v-model="page" class="my-4" :length="total" :total-visible="5" :disabled="push"
+      color="primary general--text" @input="loadData()"></v-pagination>
   </v-container>
 </template>
 
@@ -255,7 +191,7 @@ export default Vue.extend({
         this.draft = res.data.draft
         this.loadData()
       })
-      .catch((err) => {})
+      .catch((err) => { })
   },
   methods: {
     tabLeftNewComment(event: HTMLTextAreaEvent, newComment: String) {
@@ -295,7 +231,7 @@ export default Vue.extend({
                 if (
                   // @ts-ignore
                   val.user.userName === this.$auth.user.userName ||
-                  this.$auth.user.role === 'admin'
+                  this.$auth.user?.role === 'admin'
                 ) {
                   val.editText = '編集'
                 }
@@ -305,7 +241,7 @@ export default Vue.extend({
             this.total = Math.ceil(res.data.count / this.perpage)
             this.show = true
           })
-          .catch((err) => {})
+          .catch((err) => { })
           .finally(() => {
             this.push = false
           })
@@ -324,7 +260,7 @@ export default Vue.extend({
           this.showConfirm = false
           this.items.splice(this.editedIndex, 1)
         })
-        .catch((err) => {})
+        .catch((err) => { })
         .finally(() => {
           this.push = false
         })
@@ -342,7 +278,7 @@ export default Vue.extend({
             item.editText = '編集'
             item.edit = false
           })
-          .catch((err) => {})
+          .catch((err) => { })
           .finally(() => {
             this.push = false
           })
@@ -363,7 +299,7 @@ export default Vue.extend({
           this.editItem = res.data
           this.editItem.edit = false
           this.editItem.editText = '編集'
-          if (this.items == null || this.items == []) {
+          if (this.items == null) {
             await this.loadData()
           } else {
             this.items.unshift(this.editItem)

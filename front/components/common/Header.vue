@@ -26,11 +26,11 @@
           <v-responsive class="pl-5">
             <span class="ml-1">ユーザ名</span>
             <p class="ml-3 my-0">
-              {{ $auth.user!.userName }}
+              {{ $auth.user?.userName }}
             </p>
             <span class="ml-1">Eメール</span>
             <p class="ml-3 my-0">
-              {{ $auth.user!.email }}
+              {{ $auth.user?.email }}
             </p>
           </v-responsive>
           <v-list-item>
@@ -39,7 +39,7 @@
           <v-list-item>
             <v-btn :to="{ path: '/articles/me', query: { page: 1, perpage: 10 } }" nuxt plain>自分の記事一覧</v-btn>
           </v-list-item>
-          <v-list-item v-if="$auth.user!.role === 'admin'">
+          <v-list-item v-if="$auth.user?.role === 'admin'">
             <v-btn :to="{ path: '/admin/users', query: { page: 1, perpage: 20 } }" nuxt plain>管理者画面へ</v-btn>
           </v-list-item>
           <v-list-item>

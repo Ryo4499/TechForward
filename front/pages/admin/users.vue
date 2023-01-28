@@ -7,26 +7,13 @@
       </v-responsive>
       <v-spacer></v-spacer>
       <v-responsive max-width="90vw">
-        <v-select
-          v-model="perpage"
-          :items="pageList"
-          label="表示件数"
-          @input="loadData"
-        ></v-select>
+        <v-select v-model="perpage" :items="pageList" label="表示件数" @input="loadData"></v-select>
       </v-responsive>
       <v-spacer></v-spacer>
     </div>
     <v-flex style="overflow: auto">
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        :server-items-length="total"
-        :page.sync="page"
-        hide-default-footer
-        disable-sort
-        :loading="loading"
-        class="my-5"
-      >
+      <v-data-table :headers="headers" :items="items" :server-items-length="total" :page.sync="page" hide-default-footer
+        disable-sort :loading="loading" class="my-5">
         <template #top>
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
@@ -39,148 +26,75 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="ユーザ名"
-                          :rules="{
-                            max: 30,
-                            min: 1,
-                            required: true,
-                            regex: /^[ぁ-ゖァ-ヾ一-鶴a-zA-Z0-9]+$/,
-                          }"
-                        >
-                          <v-text-field
-                            v-model.trim="editedItem.userName"
-                            :error-messages="errors"
-                            :counter="30"
-                            maxlength="30"
-                            placeholder="ユーザ名を入力"
-                            label="ユーザ名"
-                            required
-                          ></v-text-field>
+                        <ValidationProvider v-slot="{ errors }" name="ユーザ名" :rules="{
+                          max: 30,
+                          min: 1,
+                          required: true,
+                          regex: /^[ぁ-ゖァ-ヾ一-鶴a-zA-Z0-9]+$/,
+                        }">
+                          <v-text-field v-model.trim="editedItem.userName" :error-messages="errors" :counter="30"
+                            maxlength="30" placeholder="ユーザ名を入力" label="ユーザ名" required></v-text-field>
                         </ValidationProvider>
                       </v-col>
                       <v-col cols="12">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="Eメール"
-                          rules="max:128|min:8|email|required"
-                        >
-                          <v-text-field
-                            v-model.trim="editedItem.email"
-                            :error-messages="errors"
-                            :counter="128"
-                            maxlength="128"
-                            placeholder="Eメールを入力"
-                            label="Eメール"
-                            required
-                          ></v-text-field>
+                        <ValidationProvider v-slot="{ errors }" name="Eメール" rules="max:128|min:8|email|required">
+                          <v-text-field v-model.trim="editedItem.email" :error-messages="errors" :counter="128"
+                            maxlength="128" placeholder="Eメールを入力" label="Eメール" required></v-text-field>
                         </ValidationProvider>
                       </v-col>
                       <v-col cols="12">
-                        <v-switch
-                          v-model="inputtable"
-                          label="パスワードを変更しますか?"
-                        ></v-switch>
+                        <v-switch v-model="inputtable" label="パスワードを変更しますか?"></v-switch>
                       </v-col>
                       <v-col v-if="inputtable" cols="12">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="パスワード"
-                          :rules="{
-                            max: 128,
-                            min: 8,
-                            regex: /^[!-~]*$/,
-                            required: true,
-                          }"
-                        >
-                          <v-text-field
-                            v-model="editedItem.password"
-                            label="パスワード"
-                            placeholder="パスワードを入力"
-                            :error-messages="errors"
-                            :counter="128"
-                            maxlength="128"
+                        <ValidationProvider v-slot="{ errors }" name="パスワード" :rules="{
+                          max: 128,
+                          min: 8,
+                          regex: /^[!-~]*$/,
+                          required: true,
+                        }">
+                          <v-text-field v-model="editedItem.password" label="パスワード" placeholder="パスワードを入力"
+                            :error-messages="errors" :counter="128" maxlength="128" :append-icon="
+                              passwordShow
+                                ? 'mdi-eye-outline'
+                                : 'mdi-eye-off-outline'
+                            " class="align-center" :type="passwordShow ? 'text' : 'password'" :disabled="!inputtable"
+                            clearable @click:append="passwordShow = !passwordShow"></v-text-field>
+                        </ValidationProvider>
+                      </v-col>
+                      <v-col v-if="inputtable" cols="12">
+                        <ValidationProvider v-slot="{ errors }" name="パスワード(確認用)" :rules="{
+                          max: 128,
+                          min: 8,
+                          regex: /^[!-~]*$/,
+                          required: true,
+                          password: '@パスワード',
+                        }">
+                          <v-text-field v-model="editedItem.passwordConfirm" label="パスワード(確認用)"
+                            placeholder="パスワード(確認用)を入力" :error-messages="errors" :counter="128" maxlength="128"
                             :append-icon="
                               passwordShow
                                 ? 'mdi-eye-outline'
                                 : 'mdi-eye-off-outline'
-                            "
-                            class="align-center"
-                            :type="passwordShow ? 'text' : 'password'"
-                            :disabled="!inputtable"
-                            clearable
-                            @click:append="passwordShow = !passwordShow"
-                          ></v-text-field>
-                        </ValidationProvider>
-                      </v-col>
-                      <v-col v-if="inputtable" cols="12">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="パスワード(確認用)"
-                          :rules="{
-                            max: 128,
-                            min: 8,
-                            regex: /^[!-~]*$/,
-                            required: true,
-                            password: '@パスワード',
-                          }"
-                        >
-                          <v-text-field
-                            v-model="editedItem.passwordConfirm"
-                            label="パスワード(確認用)"
-                            placeholder="パスワード(確認用)を入力"
-                            :error-messages="errors"
-                            :counter="128"
-                            maxlength="128"
-                            :append-icon="
-                              passwordShow
-                                ? 'mdi-eye-outline'
-                                : 'mdi-eye-off-outline'
-                            "
-                            class="align-center"
-                            :type="passwordConfirmShow ? 'text' : 'password'"
-                            :disabled="!inputtable"
-                            clearable
-                            @click:append="
+                            " class="align-center" :type="passwordConfirmShow ? 'text' : 'password'"
+                            :disabled="!inputtable" clearable @click:append="
                               passwordConfirmShow = !passwordConfirmShow
-                            "
-                          ></v-text-field>
+                            "></v-text-field>
                         </ValidationProvider>
                       </v-col>
                       <v-col cols="12">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="ロール"
-                          :rules="{
-                            required: true,
-                          }"
-                        >
-                          <v-select
-                            v-model.trim="editedItem.role"
-                            label="ロール"
-                            placeholder="ロールを入力"
-                            :error-messages="errors"
-                            :items="['user', 'admin']"
-                            required
-                          ></v-select>
+                        <ValidationProvider v-slot="{ errors }" name="ロール" :rules="{
+                          required: true,
+                        }">
+                          <v-select v-model.trim="editedItem.role" label="ロール" placeholder="ロールを入力"
+                            :error-messages="errors" :items="['user', 'admin']" required></v-select>
                         </ValidationProvider>
                       </v-col>
                       <v-col cols="12">
-                        <ValidationProvider
-                          v-slot="{ errors }"
-                          name="有効"
-                          :rules="{
-                            required: true,
-                          }"
-                        >
-                          <v-select
-                            v-model="editedItem.isActivate"
-                            label="有効"
-                            placeholder="アイテムを有効にする"
-                            :error-messages="errors"
-                            :items="[true, false]"
-                          ></v-select>
+                        <ValidationProvider v-slot="{ errors }" name="有効" :rules="{
+                          required: true,
+                        }">
+                          <v-select v-model="editedItem.isActivate" label="有効" placeholder="アイテムを有効にする"
+                            :error-messages="errors" :items="[true, false]"></v-select>
                         </ValidationProvider>
                       </v-col>
                     </v-row>
@@ -192,12 +106,7 @@
                   <v-btn color="blue darken-1" text @click="close">
                     キャンセル
                   </v-btn>
-                  <v-btn
-                    :disabled="invalid || push"
-                    color="blue darken-1"
-                    text
-                    @click="save"
-                  >
+                  <v-btn :disabled="invalid || push" color="blue darken-1" text @click="save">
                     保存
                   </v-btn>
                 </v-card-actions>
@@ -211,27 +120,21 @@
           </v-icon>
         </template>
         <template #item.articles="{ item }">
-          <v-btn
-            :to="{
-              name: 'admin/articles/user/username',
-              params: { username: item.userName },
-              query: { page: 1, perpage: 20 },
-            }"
-            nuxt
-          >
+          <v-btn :to="{
+            name: 'admin/articles/user/username',
+            params: { username: item.userName },
+            query: { page: 1, perpage: 20 },
+          }" nuxt>
             <v-icon>mdi-book-open-blank-variant</v-icon>
             <h6 class="ml-2">記事</h6>
           </v-btn>
         </template>
         <template #item.comments="{ item }">
-          <v-btn
-            :to="{
-              name: 'admin/comments/user/username',
-              params: { username: item.userName },
-              query: { page: 1, perpage: 20 },
-            }"
-            nuxt
-          >
+          <v-btn :to="{
+            name: 'admin/comments/user/username',
+            params: { username: item.userName },
+            query: { page: 1, perpage: 20 },
+          }" nuxt>
             <v-icon>mdi-comment-outline</v-icon>
             <h6 class="ml-2">コメント</h6>
           </v-btn>
@@ -241,24 +144,12 @@
         </template>
       </v-data-table>
     </v-flex>
-    <v-pagination
-      v-model="page"
-      :length="total"
-      :total-visible="5"
-      :disabled="push"
-      color="primary general--text"
-      class="my-4"
-      @input="loadData()"
-    ></v-pagination>
+    <v-pagination v-model="page" :length="total" :total-visible="5" :disabled="push" color="primary general--text"
+      class="my-4" @input="loadData()"></v-pagination>
     <v-snackbar v-model="AlreadyRegisterSnackbar" timeout="2000">
       <h4 class="red--text text--accent-3">既にユーザが登録されています｡</h4>
       <template #action="{ attrs }">
-        <v-btn
-          class="blue--text text--lighten-5"
-          text
-          v-bind="attrs"
-          @click="AlreadyRegisterSnackbar = false"
-        >
+        <v-btn class="blue--text text--lighten-5" text v-bind="attrs" @click="AlreadyRegisterSnackbar = false">
           Close
         </v-btn>
       </template>
@@ -266,12 +157,7 @@
     <v-snackbar v-model="mistake" timeout="2000">
       <h4 class="red--text text--accent-3">{{ errorMsg }}</h4>
       <template #action="{ attrs }">
-        <v-btn
-          class="blue--text text--lighten-5"
-          text
-          v-bind="attrs"
-          @click="mistake = false"
-        >
+        <v-btn class="blue--text text--lighten-5" text v-bind="attrs" @click="mistake = false">
           Close
         </v-btn>
       </template>
@@ -281,12 +167,7 @@
         エラーが発生しました｡ログアウトして下さい｡
       </h4>
       <template #action="{ attrs }">
-        <v-btn
-          class="blue--text text--lighten-5"
-          text
-          v-bind="attrs"
-          @click="logoutRequired = false"
-        >
+        <v-btn class="blue--text text--lighten-5" text v-bind="attrs" @click="logoutRequired = false">
           閉じる
         </v-btn>
       </template>
@@ -308,6 +189,7 @@ export type DataType = {
   defaultItem: UserAdmin
   tmpPassword: string
   passwordShow: boolean
+  passwordConfirmShow: boolean
   errorMsg: string
   push: boolean
   inputtable: boolean
@@ -333,7 +215,7 @@ export default Vue.extend({
       ],
     }
   },
-  data() {
+  data(): DataType {
     return {
       dialog: false,
       AlreadyRegisterSnackbar: false,
@@ -362,7 +244,9 @@ export default Vue.extend({
         role: 'user',
         isActivate: true,
       },
+      tmpPassword: "",
       passwordShow: false,
+      passwordConfirmShow: false,
       errorMsg: '',
       push: false,
       inputtable: false,
@@ -439,7 +323,7 @@ export default Vue.extend({
             query: { page: String(this.page), perpage: String(this.perpage) },
           })
         })
-        .catch((err) => {})
+        .catch((err) => { })
         .finally(() => {
           this.loading = false
           this.push = false

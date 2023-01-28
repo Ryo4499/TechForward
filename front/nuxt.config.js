@@ -89,6 +89,9 @@ export default {
     '@nuxtjs/style-resources',
     '@nuxtjs/proxy'
   ],
+  axios: {
+    proxy: true,
+  },
   proxy: {
     '/api/': {
       target: 'http://back:5000',
@@ -133,15 +136,10 @@ export default {
     typographer: true,
     quotes: true,
     langPrefix: 'language-',
-    highlight(str: string, lang: string) {
+    highlight(str, lang) {
       return `<pre><code class="hljs language-${lang}">${str}</code></pre>`
     },
   },
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    proxy: true,
-  },
-
   auth: {
     watchLoggedIn: true,
     resetOnError: true,

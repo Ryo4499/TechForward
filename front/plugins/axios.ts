@@ -1,10 +1,8 @@
-import { AxiosError } from 'axios'
-
 export default ({ $axios, error: nuxtError, $auth }) => {
   $axios.onRequest((_config) => {
     $axios.setHeader('Content-Type', 'application/json', ['post'])
   })
-  $axios.onError((error: AxiosError) => {
+  $axios.onError((error) => {
     const status = error!.response!.status
     switch (status) {
       case 400:

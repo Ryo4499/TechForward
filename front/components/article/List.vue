@@ -58,14 +58,14 @@
           </div>
           <div class="d-flex flex-row justify-end mt-4 mb-1">
             <v-btn v-if="
-              item.user.userName === $auth.user!.userName ||
-              $auth.user!.role === 'admin'
+              item.user.userName === $auth.user?.userName ||
+              $auth.user?.role === 'admin'
             " :disabled="push" class="mx-2" outlined @click.prevent="deleteConfirm(item)">
               削除
             </v-btn>
             <v-btn v-if="
-              item.user.userName === $auth.user!.userName ||
-              $auth.user!.role === 'admin'
+              item.user.userName === $auth.user?.userName ||
+              $auth.user?.role === 'admin'
             " :disabled="push" class="mx-1" :to="/edit-article/ + `${item.articleId}`" outlined nuxt>
               編集
             </v-btn>
@@ -154,7 +154,7 @@ export default Vue.extend({
       } else if (path === 'articles/user/username') {
         return `${this.$route.params.username}さんの記事一覧`
       } else if (path === 'articles/me') {
-        const name = this.$auth.user!.userName
+        const name = this.$auth.user?.userName
         return `${name}さんの記事一覧`
       } else {
         return '記事一覧ページ'
