@@ -1,3 +1,26 @@
+FROM node:16-alpine as dev-env
+
+ARG UID
+ARG GID
+
+ENV TZ=Asia/Tokyo
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:ja
+ENV LC_ALL ja_JP.UTF-8
+
+WORKDIR /front
+
+# プロジェクトの依存ライブラリをインストールする
+RUN apk update && apk add -y --no-cache tzdata python3 make gcc g++
+COPY --chown=node:node ./package.json ./
+COPY --chown=node:node ./yarn.lock ./
+
+RUN yarn install 
+
+COPY --chown=node:node . .
+
+CMD ["yarn", "dev"]
+
 FROM node:16-alpine
 
 ARG UID
@@ -12,17 +35,12 @@ WORKDIR /front
 
 # プロジェクトの依存ライブラリをインストールする
 RUN apk update && apk add -y --no-cache tzdata python3 make gcc g++
-
-# カレントワーキングディレクトリ(つまり 'front' フォルダ)にプロジェクトのファイルやフォルダをコピーする
-COPY --chown=node:node ./package.json ./
-COPY --chown=node:node ./yarn.lock ./
-
-RUN yarn install && yarn build && yarn cache clean
-
+RUN chown -R node:node ./
 COPY --chown=node:node . .
 
-RUN chown node:node -R ./ && unset UID GID GROUP
-
 USER node 
+RUN yarn install 
 
-CMD ["yarn","start"]
+RUN yarn build && yarn cache clean
+
+CMD ["yarn", "start"]

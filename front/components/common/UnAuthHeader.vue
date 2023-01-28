@@ -22,7 +22,7 @@
       <v-switch v-model="$vuetify.theme.dark" hide-details="false" color="switch general--text"
         class="mx-2 general--text" inset>
         <template v-slot:label>
-          <v-icon color="header">mdi-brightness-4</v-icon>
+          <v-icon color="general">mdi-brightness-4</v-icon>
         </template>
       </v-switch>
     </v-row>

@@ -248,7 +248,7 @@ export default {
     loadingScreen: false,
     hardSource: true,
     //analyze: true,
-    transpile: ['vee-validate/dist/rules'],
+    transpile: ['vee-validate/dist/rules', 'axios'],
     extend(config, { isClient }) {
       if (isClient) {
         config.optimization.splitChunks.maxSize = 200000

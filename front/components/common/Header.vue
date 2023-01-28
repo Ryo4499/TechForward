@@ -45,7 +45,7 @@
           <v-list-item>
             <v-switch v-model="$vuetify.theme.dark" color="header" inset>
               <template v-slot:label>
-                <v-icon color="header">mdi-brightness-4</v-icon>
+                <v-icon color="general">mdi-brightness-4</v-icon>
               </template>
             </v-switch>
           </v-list-item>
