@@ -41,7 +41,7 @@ PyJWT==2.6.0
 pymemcache==4.0.0
 PyMySQL==1.0.2
 pyrsistent==0.19.3
-python-dotenv==0.21.1
+python-dotenv==1.0.0
 pytz==2022.7.1
 regex==2022.10.31
 six==1.16.0
