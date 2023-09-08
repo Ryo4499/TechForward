@@ -46,7 +46,7 @@ pytz==2022.7.1
 regex==2022.10.31
 six==1.16.0
 SQLAlchemy==1.4.46
-SQLAlchemy-Utils==0.39.0
+SQLAlchemy-Utils==0.41.1
 tomli==2.0.1
 typing_extensions==4.4.0
 uvicorn==0.20.0
