@@ -29,7 +29,7 @@
     "markdown-it-image-figures": "^1.2.0",
     "markdown-it-katex": "^2.0.3",
     "markdown-it-link-attributes": "^3.0.0",
-    "markdown-it-multimd-table": "^4.1.0",
+    "markdown-it-multimd-table": "^4.2.3",
     "markdown-it-plantuml": "^1.4.1",
     "markdown-it-sanitizer": "^0.4.3",
     "markdown-it-table-of-contents": "^0.5.2",
